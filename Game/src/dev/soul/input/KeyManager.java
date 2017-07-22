@@ -33,10 +33,10 @@ public class KeyManager implements KeyListener {
 		left = keys[KeyEvent.VK_A];
 		right = keys[KeyEvent.VK_D];
 		
-		aUp = keys[KeyEvent.VK_NUMPAD8];
-		aDown = keys[KeyEvent.VK_NUMPAD5];
-		aLeft = keys[KeyEvent.VK_NUMPAD4];
-		aRight = keys[KeyEvent.VK_NUMPAD6];
+		aUp = keys[KeyEvent.VK_UP];
+		aDown = keys[KeyEvent.VK_DOWN];
+		aLeft = keys[KeyEvent.VK_LEFT];
+		aRight = keys[KeyEvent.VK_RIGHT];
 	}
 	
 	public boolean keyJustPressed(int keyCode){
