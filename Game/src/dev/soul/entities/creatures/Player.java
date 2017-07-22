@@ -1,5 +1,6 @@
 package dev.soul.entities.creatures;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -14,7 +15,7 @@ import dev.soul.inventory.Inventory;
 public class Player extends Creature {
 	
 	//Animations
-	private Animation animDown, animUp, animLeft, animRight;
+	private Animation animMove;
 	// Attack timer
 	private long lastAttackTimer, attackCooldown = 800, attackTimer = attackCooldown;
 	// Inventory
@@ -23,16 +24,13 @@ public class Player extends Creature {
 	public Player(Handler handler, float x, float y) {
 		super(handler, x, y, Creature.DEFAULT_CREATURE_WIDTH, Creature.DEFAULT_CREATURE_HEIGHT);
 		
-		bounds.x = 22;
-		bounds.y = 44;
-		bounds.width = 19;
-		bounds.height = 19;
+		bounds.x = 7;
+		bounds.y = 20;
+		bounds.width = 50;
+		bounds.height = 40;
 		
 		//Animatons
-		animDown = new Animation(500, Assets.player_down);
-		animUp = new Animation(500, Assets.player_up);
-		animLeft = new Animation(500, Assets.player_left);
-		animRight = new Animation(500, Assets.player_right);
+		animMove = new Animation(500, Assets.player_move);
 		
 		inventory = new Inventory(handler);
 	}
@@ -40,10 +38,7 @@ public class Player extends Creature {
 	@Override
 	public void tick() {
 		//Animations
-		animDown.tick();
-		animUp.tick();
-		animRight.tick();
-		animLeft.tick();
+		animMove.tick();
 		//Movement
 		getInput();
 		move();
@@ -125,7 +120,9 @@ public class Player extends Creature {
 		
 		if(handler.getKeyManager().up || handler.getKeyManager().down || handler.getKeyManager().left || handler.getKeyManager().right){
 			g.drawImage(getCurrentAnimationFrame(), (int) (x - handler.getGameCamera().getxOffset()), (int) (y - handler.getGameCamera().getyOffset()), width, height, null);
-		}else{}
+		}else{
+			g.drawImage(getCurrentAnimationFrame(),(int)(x-handler.getGameCamera().getxOffset()),(int)(y-handler.getGameCamera().getyOffset()), width, height, null);
+			}
 	}
 	
 	public void postRender(Graphics g){
@@ -133,23 +130,11 @@ public class Player extends Creature {
 	}
 	
 	private BufferedImage getCurrentAnimationFrame(){
-		if(handler.getKeyManager().aLeft){
-			return animLeft.getCurrentFrame();
-		}else if(handler.getKeyManager().aRight){
-			return animRight.getCurrentFrame();
-		}else if(handler.getKeyManager().aUp){
-			return animUp.getCurrentFrame();
-		}else if(handler.getKeyManager().aDown){
-			return animDown.getCurrentFrame();
-		}else if(handler.getKeyManager().left){
-			return animLeft.getCurrentFrame();
-		}else if(handler.getKeyManager().right){
-			return animRight.getCurrentFrame();
-		}else if(handler.getKeyManager().up){
-			return animUp.getCurrentFrame();
+		if(handler.getKeyManager().left || handler.getKeyManager().right || handler.getKeyManager().down || handler.getKeyManager().up){
+			return animMove.getCurrentFrame();
 		}else{
-			return animDown.getCurrentFrame();
-		}
+			return Assets.player_still;
+			}
 	}
 
 	public Inventory getInventory() {
