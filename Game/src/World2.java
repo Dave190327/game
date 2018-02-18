@@ -12,7 +12,7 @@ public class World2 {
 		playersInfo[1][0]=100;playersInfo[1][1]=100;//matter
 		deckP1=new ArrayList<Integer>();
 		deckP2=new ArrayList<Integer>();
-		int[] x={1,1,2,3,4};
+		int[] x={1,1,1,1,1,1,1,2,3};
 		playersInfo[0][0]=-1;playersInfo[0][1]=-1;
 		for(int y=0;y<x.length;y++){
 			deckP1.add(x[y]);

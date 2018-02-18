@@ -11,7 +11,7 @@ public class Assets {
 	public static BufferedImage[] tiles=new BufferedImage[256];
 	public static BufferedImage[] cards=new BufferedImage[256];
 	public static BufferedImage[] grass=new BufferedImage[256];
-	public static BufferedImage background;
+	public static BufferedImage background,blackSmith;
 	public static void init(){
 		SpriteSheet sheet = new SpriteSheet(ImageLoader.loadImage("/Cards/Spritesheet.PNG"));
 		int z=1;
@@ -34,6 +34,7 @@ public class Assets {
 			}
 		}
 		background = ImageLoader.loadImage("/Cards/background.jpg");
+		blackSmith = ImageLoader.loadImage("/Cards/blackSmith.jpg");
 	}
 	
 }

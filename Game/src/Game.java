@@ -12,7 +12,7 @@ public class Game implements Runnable {
 
 	int ticks = 0;
 	int[] temp=new int[5];
-	public int width, height,fontSize=30,mode=1;
+	public int width, height,fontSize=30,mode=2;
 	public String title;
 	String[] info= {"","","",""};
 	
@@ -31,7 +31,6 @@ public class Game implements Runnable {
 	public int[] hand=new int[5];
 	private World2 world=new World2();
 	
-
 	int rox=(width/10)+(width/100),roy=(height/100);//The upper left hand corner of the "game screen";
 	int rgssx=(width-(2*(width/10)+2*(width/100))),rgssy=height-(height/10);//Size of the game screen;
 	
@@ -133,9 +132,10 @@ public class Game implements Runnable {
 		//Draw Here!
 		rox=(width/10)+(width/100);roy=(height/100);//The upper left hand corner of the "game screen";
 		rgssx=(width-(2*(width/10)+2*(width/100)));rgssy=height-(height/10);//Size of the game screen;
-		
+		fontSize=height/20;g.setColor(Color.GREEN);g.setFont(new Font("TimesRoman",Font.PLAIN,fontSize));
 		g.drawImage(Assets.background,0,0,width,height,null);
 		if(mode==1){
+			g.drawImage(Assets.background,0,0,width,height,null);
 			//Send variables to the world class
 			ArrayList <Integer> render;render=new ArrayList<Integer>();
 			int[] temp={rox,roy,rgssx,rgssy};
@@ -164,12 +164,14 @@ public class Game implements Runnable {
 				}
 			}
 			//------
+			for(int x=0;x<info.length;x++){
+				g.drawString(info[x],rox,fontSize*(x+1));
+			}
 		}
-		g.setColor(Color.black);
-		g.setFont(new Font("TimesRoman",Font.PLAIN,fontSize));
-		g.setColor(Color.GREEN);
-		for(int x=0;x<info.length;x++){
-			g.drawString(info[x],rox,fontSize*(x+1));
+		if(mode==2){
+			g.drawImage(Assets.blackSmith,0,0,width,height,null);
+			String[] t={"Dave's card creation",""};
+			g.drawString(t[0],0,fontSize);
 		}
 		//End Drawing!
 		bs.show();
